@@ -3,7 +3,10 @@ package org.m_jimmer.remembermeish;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
-import org.apache.logging.log4j.Logger;
+
+import org.slf4j.Logger;
+
+
 
 import java.io.IOException;
 import java.io.Reader;
@@ -24,7 +27,10 @@ public class RememberMeIshStorage {
     private final Map<UUID, String> rememberedServers = new HashMap<>();
 
     public RememberMeIshStorage(Path configDir, Logger logger) {
+
+
         this.logger = logger;
+
         this.configFile = configDir.resolve(CONFIG_FILE);
         this.gson = new GsonBuilder().setPrettyPrinting().create();
         loadConfig();

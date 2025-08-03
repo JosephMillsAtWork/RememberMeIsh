@@ -1,6 +1,8 @@
 package org.m_jimmer.remembermeish;
 
 import com.google.inject.Inject;
+
+import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.connection.DisconnectEvent;
 import com.velocitypowered.api.event.player.ServerPreConnectEvent;
@@ -8,7 +10,8 @@ import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ProxyServer;
-import org.apache.logging.log4j.Logger;
+
+import org.slf4j.Logger;
 
 import java.nio.file.Path;
 import java.util.Optional;
@@ -31,10 +34,15 @@ public class RememberMeIshPlugin {
     private RememberMeIshStorage storage;
 
     @Inject
-    public RememberMeIshPlugin(ProxyServer server, Logger logger, Path dataDirectory) {
+    public RememberMeIshPlugin(
+            ProxyServer server,
+            Logger logger,
+            @DataDirectory Path dataDirectory
+    ) {
         this.server = server;
         this.logger = logger;
         this.configDir = dataDirectory;
+        this.storage = new RememberMeIshStorage(dataDirectory, logger);
     }
 
     @Subscribe
