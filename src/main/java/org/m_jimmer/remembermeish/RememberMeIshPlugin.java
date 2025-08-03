@@ -65,13 +65,20 @@ public class RememberMeIshPlugin {
 
     @Subscribe
     public void onPreConnect(ServerPreConnectEvent event) {
-        UUID uuid = event.getPlayer().getUniqueId();
-        Optional<String> remembered = storage.getPlayerServer(uuid);
-        remembered.flatMap(server::getServer).ifPresent(server -> {
-            event.setResult(ServerPreConnectEvent.ServerResult.allowed(server));
-            logger.info("[RememberMe'ish] Redirecting {} to remembered server {}",
-                    event.getPlayer().getUsername(),
-                    server.getServerInfo().getName());
-        });
+        Player player = event.getPlayer();
+        if (!player.getCurrentServer().isPresent()) {
+            UUID uuid = player.getUniqueId();
+            Optional<String> remembered = storage.getPlayerServer(uuid);
+            remembered.flatMap(server::getServer).ifPresent(server -> {
+                event.setResult(ServerPreConnectEvent.ServerResult.allowed(server));
+                logger.info("[RememberMe'ish] Redirecting {} to remembered server {}",
+                        player.getUsername(),
+                        server.getServerInfo().getName());
+            });
+        } else {
+            logger.info("[RememberMe'ish] {} is already on server: {}, skipping redirect.",
+                    player.getUsername(),
+                    player.getCurrentServer().map(s -> s.getServerInfo().getName()).orElse("<unknown>"));
+        }
     }
 }
