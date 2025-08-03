@@ -1,0 +1,22 @@
+# Gradle files
+.idea/
+.gradle/
+
+build/
+
+.idea/ # If using IntelliJ IDEA
+.classpath
+.project
+.settings/
+*.iml # If using IntelliJ IDEA
+
+# Minecraft/ForgeGradle specific
+run/
+eclipse/
+bin/
+local/
+logs/
+generated/
+reobf/
+src/main/resources/pack.mcmeta # Often generated or not needed in VCS for mods
+src/main/resources/assets/ # If assets are generated or downloaded, otherwise include
