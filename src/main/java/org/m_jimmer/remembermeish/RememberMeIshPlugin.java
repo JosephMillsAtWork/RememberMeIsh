@@ -22,7 +22,7 @@ import java.util.UUID;
         name = "RememberMe'ish",
         version = "1.0.0",
         description = "Send the player to the last known server and spot if enabled on the proxy server" ,
-        url = "",
+        url = "https://github.com/JosephMillsAtWork/RememberMeIsh/tree/main",
         authors = {"m_jimmer"}
 )
 

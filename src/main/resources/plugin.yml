@@ -1,4 +1,0 @@
-name: RememberMeIsh
-version: '1.0-SNAPSHOT'
-main: org.m_jimmer.remembermeish.RememberMeIshPlugin
-api-version: '1.21'
